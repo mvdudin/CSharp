@@ -6,6 +6,7 @@ void ReadArray(int[] p_array)
     p_array[i] = int.Parse(Console.ReadLine()!);
    }
 }
+
 void WriteArray(int[] p_array)
 {for (int i = 0; i < p_array.Length; i++)
    {Console.Write($"{p_array[i]} ");}
