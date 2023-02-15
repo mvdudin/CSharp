@@ -1,36 +1,51 @@
 ﻿// SНапишите программу, которая реализует обход введенного двумерного массива, 
 // начиная с крайнего нижнего левого элемента против часовой стрелки.
 
-//1 2 3
-//4 5 6 -> 7 8 9 6 3 2 1 4 5
-//7 8 9
-
-int[,] array = new int[3, 4];
-array[0, 0] = 1; array[0, 1] = 2; array[0, 2] = 3; array[0, 3] = 4;
-array[1, 0] = 5; array[1, 1] = 6; array[1, 2] = 7; array[1, 3] = 9;
-array[2, 0] = 9; array[2, 1] = 10; array[2, 2] = 11; array[2, 3] = 12;
-
-int minRow = 0;
-int maxRow = array.GetLength(0)-1;
-
-int minCol = 0;
-int maxCol = array.GetLength(1)-1;
-
-do
+void PrintArraySpiral(int[,] pArray)
 {
-    for (int col = minCol; col <= maxCol; col++)
-    { Console.Write($"[{maxRow},{col}] = {array[maxRow, col]} "); } 
-    maxRow--;
-    for (int row = maxRow ; row >= minRow; row--)
-    { Console.Write($"[{row},{maxCol}]={array[row, maxCol]} "); }
-    maxCol--;
-    for (int col = maxCol; col >= minCol; col--)
-    { Console.Write($"[{minRow},{col}]={array[minRow, col]} "); }
-    minRow++;
-    for (int row = minRow; row <= maxRow; row++)
-    { Console.Write($"[{row}, {minCol}]={array[row, minCol]}, "); }
-    minCol++;
-}
-while (minCol > maxCol || minRow > maxRow);
+    int minRow = 0;
+    int maxRow = pArray.GetLength(0) - 1;
 
+    int minCol = 0;
+    int maxCol = pArray.GetLength(1) - 1;
+
+    do
+    {   //Row right
+        for (int col = minCol; col <= maxCol; col++)
+        { Console.Write($"{pArray[maxRow, col]}, "); }
+        if (maxRow == minRow)
+        { break; }
+        else
+        { maxRow--; }
+
+        //Col up
+        for (int row = maxRow; row >= minRow; row--)
+        { Console.Write($"{pArray[row, maxCol]}, "); }
+        if (maxCol == minCol)
+        { break; }
+        else
+        { maxCol--; }
+
+        // Row left 
+        for (int col = maxCol; col >= minCol; col--)
+        { Console.Write($"{pArray[minRow, col]}, "); }
+        if (maxRow == minRow)
+        { break; }
+        else
+        { minRow++; }
+
+        //Col down
+        for (int row = minRow; row <= maxRow; row++)
+        { Console.Write($"{pArray[row, minCol]}, "); }
+        if (maxCol == minCol)
+        { break; }
+        else
+        { minCol++; }
+    } while (true);
+    Console.WriteLine();
+}
+
+int[,] vArray = new int[3, 3] {{1, 2, 3},{ 4,5,6},{ 7,8,9}};
+Console.Clear();
+PrintArraySpiral(vArray);
 
