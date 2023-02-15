@@ -5,16 +5,32 @@
 //4 5 6 -> 7 8 9 6 3 2 1 4 5
 //7 8 9
 
-int[, ]  v_array = new int[3, 3];
-v_array[0,0] = 1; v_array[0,1] = 2; v_array[0,2] = 3;
-v_array[1,0] = 4; v_array[1,1] = 5; v_array[1,2] = 6;
-v_array[2,0] = 7; v_array[2,1] = 8; v_array[2,2] = 9;
+int[,] array = new int[3, 4];
+array[0, 0] = 1; array[0, 1] = 2; array[0, 2] = 3; array[0, 3] = 4;
+array[1, 0] = 5; array[1, 1] = 6; array[1, 2] = 7; array[1, 3] = 9;
+array[2, 0] = 9; array[2, 1] = 10; array[2, 2] = 11; array[2, 3] = 12;
 
-int v_col = 0;
-int v_row = v_array.GetLength(0)-1;
+int minRow = 0;
+int maxRow = array.GetLength(0)-1;
 
+int minCol = 0;
+int maxCol = array.GetLength(1)-1;
 
-for(int ; row > -1; row-- ) 
-{for(int col = 0; col < v_array.GetLength(1); col++ ) 
- {Console.Write(v_array[row, col]);}
+do
+{
+    for (int col = minCol; col <= maxCol; col++)
+    { Console.Write($"[{maxRow},{col}] = {array[maxRow, col]} "); } 
+    maxRow--;
+    for (int row = maxRow ; row >= minRow; row--)
+    { Console.Write($"[{row},{maxCol}]={array[row, maxCol]} "); }
+    maxCol--;
+    for (int col = maxCol; col >= minCol; col--)
+    { Console.Write($"[{minRow},{col}]={array[minRow, col]} "); }
+    minRow++;
+    for (int row = minRow; row <= maxRow; row++)
+    { Console.Write($"[{row}, {minCol}]={array[row, minCol]}, "); }
+    minCol++;
 }
+while (minCol > maxCol || minRow > maxRow);
+
+
